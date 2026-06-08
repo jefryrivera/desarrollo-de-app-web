@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Desarrollo de Páginas Web</title>
+    
+    <style>
+        body {
+            background-color: lightcyan; /* Un color de fondo celeste claro muy simple */
+            font-family: Arial, sans-serif; /* La fuente más común */
+            padding: 30px;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: darkblue; 
+        }
+
+        p {
+            text-align: center; 
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Desarrollo de Páginas Web</h1>
+
+    <h2>Plataforma para diseñar paginas web</h2>
+
+    <p>
+        Esta página web ha sido creada con el objetivo de mostrar el funcionamiento básico de las etiquetas HTML y la aplicación de estilos sencillos con CSS. Aquí se pueden gestionar de forma ordenada los datos principales de un sistema.
+    </p>
+
+    <h3>Desarrollado por Jefry Rivera</h3>
+
+</body>
+</html>
