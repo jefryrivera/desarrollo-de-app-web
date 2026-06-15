@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo de Páginas Web</title>
+    
+    <style>
+        body {
+            background-color: lightcyan; /* Tu color de fondo celeste claro */
+            font-family: Arial, sans-serif; /* Tu fuente original */
+            padding: 30px;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4 {
+            text-align: center;
+            color: darkblue; /* Tu color azul oscuro */
+        }
+
+        p {
+            text-align: center; 
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        /* DISEÑO DE LOS TRES CUADROS DE NAVEGACIÓN */
+        .contenedor-cuadros {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 30px auto;
+            flex-wrap: wrap;
+        }
+
+        .tarjeta-enlace {
+            background-color: white;
+            border: 2px solid darkblue;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tarjeta-enlace:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background-color: #f0fdfd;
+        }
+
+        .tarjeta-enlace h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: darkblue;
+        }
+
+        .tarjeta-enlace p {
+            margin: 0;
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* TRUCO CSS: OCULTAR LAS SECCIONES POR DEFECTO */
+        .seccion-dinamica {
+            display: none; /* Hace que el texto no se vea al inicio */
+            background-color: rgba(255, 255, 255, 0.7); 
+            padding: 30px;
+            margin: 40px auto;
+            border-radius: 8px;
+            max-width: 800px;
+            border: 1px dashed darkblue;
+            animation: fadeIn 0.5s ease; /* Efecto visual para que aparezca suave */
+        }
+
+        /* Muestra la sección SOLO cuando se le hace clic al cuadro correspondiente */
+        .seccion-dinamica:target {
+            display: block;
+        }
+
+        /* Animación suave de aparición */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ul {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .video-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Botón opcional para cerrar o regresar al inicio */
+        .btn-cerrar {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            padding: 8px 15px;
+            background-color: darkblue;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .btn-cerrar:hover {
+            background-color: #0000aa;
+        }
+
+        aside {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            margin: 40px auto;
+            border-radius: 8px;
+            max-width: 800px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid darkblue;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Plataforma para diseñar páginas web</h2>
+    </header>
+
+    <main>
+
+        <section id="inicio">
+            <h3>Inicio</h3>
+            <p>
+                Esta página web ha sido creada con el objetivo de mostrar el funcionamiento básico de las etiquetas HTML y la aplicación de estilos sencillos con CSS. Selecciona cualquiera de las siguientes opciones para desplegar su información correspondiente de manera dinámica.
+            </p>
+        </section>
+
+        <div class="contenedor-cuadros">
+            <a href="#quienes-somos" class="tarjeta-enlace">
+                <h3>Quiénes Somos</h3>
+                <p>Ver información del equipo y nuestra filosofía de trabajo.</p>
+            </a>
+
+            <a href="#servicios" class="tarjeta-enlace">
+                <h3>Servicios o Productos</h3>
+                <p>Ver tecnologías y soluciones web que ofrecemos.</p>
+            </a>
+
+            <a href="#contacto" class="tarjeta-enlace">
+                <h3>Contacto</h3>
+                <p>Ver redes sociales, correo electrónico y ubicación.</p>
+            </a>
+        </div>
+
+        <section id="quienes-somos" class="seccion-dinamica">
+            <h3>Quiénes Somos</h3>
+            <p>
+                En nuestro equipo nos dedicamos a transformar ideas en realidades digitales a través del desarrollo de aplicaciones web dinámicas, eficientes y seguras. Nuestro compromiso principal es brindar soluciones tecnológicas a medida, optimizando la experiencia del usuario y eliminando la complejidad técnica. Creemos firmemente en la innovación tecnológica como motor de desarrollo, por lo que trabajamos continuamente en el dominio de lenguajes de programación, diseño responsivo y la implementación de buenas prácticas de código. Con un enfoque sólido en la arquitectura de software y el diseño moderno, buscamos consolidarnos como desarrolladores capaces de ofrecer respuestas inmediatas y herramientas adaptadas a las exigencias del entorno digital actual.
+            </p>
+            <img src="que-es-una-app-web-diferentes-tipos-750x499.webp" alt="Interfaz y análisis de desarrollo web">
+            <a href="#inicio" class="btn-cerrar">✕ Ocultar sección</a>
+        </section>
+
+        <section id="servicios" class="seccion-dinamica">
+            <h3>Servicios o Productos</h3>
+            <ul>
+                <li><strong>Desarrollo Frontend:</strong> Creación de interfaces de usuario modernas, interactivas y totalmente adaptadas a cualquier dispositivo (diseño responsivo).</li>
+                <li><strong>Desarrollo Backend:</strong> Construcción de la lógica del servidor, gestión de bases de datos y desarrollo de APIs seguras y eficientes.</li>
+                <li><strong>Optimización y Mantenimiento:</strong> Mejora del rendimiento de aplicaciones existentes, corrección de errores y actualización de tecnologías.</li>
+                <li><strong>Desarrollo de APIs:</strong> Integración de servicios de terceros y comunicación fluida entre diferentes plataformas y sistemas.</li>
+            </ul>
+           <h4>Video Demostrativo de Servicios</h4>
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/9oVfhupb77w" title="Cómo Crear Una Web Profesional En 5 Minutos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+            <a href="#inicio" class="btn-cerrar">✕ Ocultar sección</a>
+        </section>
+
+       <section id="contacto" class="seccion-dinamica">
+            <h3>Contacto</h3>
+            <p><strong>Correo electrónico:</strong> camasonal123@desarrolloweb.com</p>
+            <p><strong>Teléfono:</strong> +593 0997858143</p>
+            <p><strong>Dirección:</strong> Av. Principal, Quevedo, Ecuador</p>
+
+            <h4>Nuestras Redes Sociales</h4>
+            <div style="text-align: center; margin: 15px 0;">
+                <a href="https://facebook.com/tu_usuario" target="_blank" style="margin: 0 10px; color: darkblue; text-decoration: none; font-weight: bold;"> Facebook</a> | 
+                <a href="https://instagram.com/tu_usuario" target="_blank" style="margin: 0 10px; color: darkblue; text-decoration: none; font-weight: bold;"> Instagram</a> | 
+                <a href="https://github.com/tu_usuario" target="_blank" style="margin: 0 10px; color: darkblue; text-decoration: none; font-weight: bold;"> GitHub</a>
+            </div>
+            
+            <a href="#inicio" class="btn-cerrar">✕ Ocultar sección</a>
+        </section>
+            <p>
