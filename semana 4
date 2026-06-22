@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo de Páginas Web - Proyecto Final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #e0f7fa; font-family: Arial, sans-serif; }
+        
+        /* Mantenemos tu lógica de secciones dinámicas */
+        .seccion-dinamica { 
+            display: none; 
+            background-color: white; 
+            border: 2px solid #0d6efd; 
+            border-radius: 15px; 
+            padding: 30px; 
+            margin-top: 30px;
+        }
+        .seccion-dinamica:target { display: block; }
+        
+        
+        .tarjeta-enlace { text-decoration: none; transition: transform 0.2s; }
+        .tarjeta-enlace:hover { transform: translateY(-10px); }
+    </style>
+</head>
+<body>
+
+    <header class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Plataforma para diseñar páginas web</h1>
+            <p class="lead">Integración de Bootstrap con navegación dinámica</p>
+        </div>
+    </header>
+
+    <main class="container my-5">
+
+        <section id="inicio" class="text-center mb-5">
+            <h3 class="text-primary">Inicio</h3>
+            <p class="text-muted">Selecciona una opción para desplegar la información:</p>
+        </section>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3">
+                <a href="#quienes-somos" class="card tarjeta-enlace h-100 shadow-sm border-primary">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">Quiénes Somos</h5>
+                        <p class="card-text text-dark">Información del equipo y filosofía.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#servicios" class="card tarjeta-enlace h-100 shadow-sm border-primary">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">Servicios</h5>
+                        <p class="card-text text-dark">Tecnologías y soluciones web.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#contacto" class="card tarjeta-enlace h-100 shadow-sm border-primary">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">Contacto</h5>
+                        <p class="card-text text-dark">Redes, correo y ubicación.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <section id="quienes-somos" class="seccion-dinamica shadow">
+            <h3 class="text-primary">Quiénes Somos</h3>
+            <p> En nuestro equipo nos dedicamos a transformar ideas en realidades digitales a través del desarrollo de aplicaciones web dinámicas, eficientes y seguras. Nuestro compromiso principal es brindar soluciones tecnológicas a medida, optimizando la experiencia del usuario y eliminando la complejidad técnica. Creemos firmemente en la innovación tecnológica como motor de desarrollo, por lo que trabajamos continuamente en el dominio de lenguajes de programación, diseño responsivo y la implementación de buenas prácticas de código. Con un enfoque sólido en la arquitectura de software y el diseño moderno, buscamos consolidarnos como desarrolladores capaces de ofrecer respuestas inmediatas y herramientas adaptadas a las exigencias del entorno digital actual.</p>
+            <img src="https://via.placeholder.com/600x300" class="img-fluid rounded my-3" alt="Desarrollo Web">
+            <a href="#inicio" class="btn btn-primary">✕ Ocultar sección</a>
+        </section>
+
+        <section id="servicios" class="seccion-dinamica shadow">
+            <h3 class="text-primary">Servicios o Productos</h3>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item">Desarrollo Frontend: Interfaces modernas y responsivas.</li>
+                <li class="list-group-item">Desarrollo Backend: Lógica de servidor y APIs seguras.</li>
+            </ul>
+            <div class="ratio ratio-16x9 my-3">
+                <iframe src="https://www.youtube.com/embed/9oVfhupb77w" allowfullscreen></iframe>
+            </div>
+            <a href="#inicio" class="btn btn-primary">✕ Ocultar sección</a>
+        </section>
+
+        <section id="contacto" class="seccion-dinamica shadow">
+            <h3 class="text-primary">Contacto</h3>
+            <form class="my-3">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" placeholder="Tu nombre">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" placeholder="ejemplo@correo.com">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mensaje</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Enviar consulta</button>
+            </form>
+            <a href="#inicio" class="
