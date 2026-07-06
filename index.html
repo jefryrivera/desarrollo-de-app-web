@@ -39,7 +39,6 @@
             <p class="text-muted">Selecciona una opción para desplegar la información:</p>
         </section>
 
-        <!-- Tarjetas de Navegación -->
         <div class="row g-4 justify-content-center">
             <div class="col-md-3">
                 <a href="#quienes-somos" class="card tarjeta-enlace h-100 shadow-sm border-primary">
@@ -67,7 +66,6 @@
             </div>
         </div>
 
-        <!-- Sección: Quiénes Somos -->
         <section id="quienes-somos" class="seccion-dinamica shadow">
             <h3 class="text-primary">Quiénes Somos</h3>
             <p>En nuestro equipo nos dedicamos a transformar ideas en realidades digitales a través del desarrollo de aplicaciones web dinámicas, eficientes y seguras...</p>
@@ -76,7 +74,6 @@
             <a href="#inicio" class="btn btn-primary mt-2">✕ Ocultar sección</a>
         </section>
 
-        <!-- Sección: Servicios -->
         <section id="servicios" class="seccion-dinamica shadow">
             <h3 class="text-primary">Servicios o Productos</h3>
             <ul class="list-group list-group-flush mb-3">
@@ -89,19 +86,18 @@
             <a href="#inicio" class="btn btn-primary">✕ Ocultar sección</a>
         </section>
 
-        <!-- Sección: Registro (Modificada según requerimientos de la imagen) -->
         <section id="registro" class="seccion-dinamica shadow">
             <h3 class="text-primary mb-4">Registro de Elementos</h3>
             
-            <!-- Contenedor para mensajes de validación -->
             <div id="mensaje-alerta"></div>
 
-            <!-- Formulario requerido -->
-            <form id="formulario-registro" class="mb-4">
+            <form id="formulario-registro" class="mb-4" novalidate>
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label class="form-label fw-bold">Nombre</label>
+                        <label class="form-label fw-bold">Nombre (Mín. 3 caracteres)</label>
                         <input type="text" id="input-nombre" class="form-control" placeholder="Ej. Aplicación Web">
+                        <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
+                        <div class="valid-feedback">¡Nombre válido!</div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-bold">Categoría o Tipo</label>
@@ -111,10 +107,14 @@
                             <option value="Backend">Backend</option>
                             <option value="Fullstack">Fullstack</option>
                         </select>
+                        <div class="invalid-feedback">Por favor, seleccione una categoría.</div>
+                        <div class="valid-feedback">¡Categoría seleccionada!</div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label class="form-label fw-bold">Descripción</label>
-                        <input type="text" id="input-descripcion" class="form-control" placeholder="Ej. Sistema de gestión">
+                        <label class="form-label fw-bold">Descripción (Mín. 10 caracteres)</label>
+                        <input type="text" id="input-descripcion" class="form-control" placeholder="Ej. Sistema de gestión integral">
+                        <div class="invalid-feedback">Escribe una descripción suficiente (mín. 10 caracteres).</div>
+                        <div class="valid-feedback">¡Descripción aceptada!</div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Agregar Registro</button>
@@ -122,23 +122,19 @@
 
             <hr>
 
-            <!-- Contador de registros -->
             <div class="alert alert-info py-2">
                 Total de registros creados: <span id="total-registros" class="fw-bold">0</span>
             </div>
 
-            <!-- Lista donde se renderizarán los datos creados dinámicamente -->
             <h5 class="text-secondary mt-3">Elementos Registrados:</h5>
             <ul id="lista-registros" class="list-group my-3">
-                <!-- Los elementos se insertarán aquí vía JS -->
-            </ul>
+                </ul>
 
             <a href="#inicio" class="btn btn-primary">✕ Ocultar sección</a>
         </section>
 
     </main>
 
-    <!-- Enlace al archivo JavaScript externo requerido -->
     <script src="script.js"></script>
 </body>
 </html>
