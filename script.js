@@ -5,12 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputNombre = document.getElementById('input-nombre');
     const inputCategoria = document.getElementById('input-categoria');
     const inputDescripcion = document.getElementById('input-descripcion');
-    const listaRegistros = document.getElementById('lista-registros');
+    const contenedorCards = document.getElementById('contenedor-cards');
     const totalRegistrosSpan = document.getElementById('total-registros');
     const mensajeAlerta = document.getElementById('mensaje-alerta');
+    const spinnerCarga = document.getElementById('spinner-carga');
+    const btnSubmit = document.getElementById('btn-submit');
+    
+    // Modal de Bootstrap
+    const modalElement = document.getElementById('modalConfirmarEliminar');
+    const modalBootstrap = new bootstrap.Modal(modalElement);
+    const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar');
+    let indiceAEliminar = null;
 
-    // 2. ESTRUCTURA DE DATOS (Arreglo de Objetos) - Requisito de la rúbrica
-    // Iniciamos con datos de ejemplo para que la página no se vea vacía al cargar
+    // 2. ESTRUCTURA DE DATOS (Arreglo de Objetos)
     let registros = [
         {
             nombre: "E-Commerce Platform",
@@ -24,55 +31,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // 3. --- RENDERIZADO DINÁMICO (Estructuras Repetitivas y Condicionales) ---
+    // 3. RENDERIZADO DINÁMICO (Usando Cards de Bootstrap)
     function renderizarRegistros() {
-        // Limpiamos la lista para evitar duplicar elementos
-        listaRegistros.innerHTML = '';
+        contenedorCards.innerHTML = '';
         
-        // CONDICIONAL: Evalúa el estado de los datos si la lista se vacía
         if (registros.length === 0) {
-            listaRegistros.innerHTML = `
-                <li class="list-group-item text-center text-muted py-3">
-                    No hay elementos registrados en el sistema.
-                </li>`;
+            contenedorCards.innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-secondary text-center py-4 mb-0" role="alert">
+                        No hay elementos registrados en el sistema.
+                    </div>
+                </div>`;
             totalRegistrosSpan.textContent = 0;
             return;
         }
 
-        // ESTRUCTURA REPETITIVA: Recorre el arreglo para pintar las tarjetas/filas
         registros.forEach((registro, index) => {
-            const nuevoLi = document.createElement('li');
-            nuevoLi.className = 'list-group-item d-flex justify-content-between align-items-center shadow-sm mb-2';
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col-md-6 col-lg-4';
 
-            // Inyección dinámica limpia basada en el objeto actual
-            nuevoLi.innerHTML = `
-                <div>
-                    <strong>${registro.nombre}</strong> 
-                    <span class="badge bg-primary ms-2">${registro.categoria}</span>
-                    <br>
-                    <small class="text-muted">${registro.descripcion}</small>
+            colDiv.innerHTML = `
+                <div class="card h-100 shadow-sm border border-light-subtle">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title mb-0 text-primary fw-bold">${registro.nombre}</h5>
+                            <span class="badge bg-primary">${registro.categoria}</span>
+                        </div>
+                        <p class="card-text text-muted flex-grow-1">${registro.descripcion}</p>
+                        <div class="pt-2 border-top mt-2 text-end">
+                            <button class="btn btn-outline-danger btn-sm" onclick="solicitarEliminacion(${index})">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-danger btn-sm" onclick="eliminarRegistro(${index})">Eliminar</button>
             `;
             
-            listaRegistros.appendChild(nuevoLi);
+            contenedorCards.appendChild(colDiv);
         });
 
-        // Actualizamos el contador dinámicamente con la longitud del arreglo
         totalRegistrosSpan.textContent = registros.length;
     }
 
-    // 4. FUNCIÓN GLOBAL DE ELIMINACIÓN
-    // Al usar plantillas de texto, asignamos la función a 'window' para que el HTML la encuentre
-    window.eliminarRegistro = function(index) {
-        // Removemos el elemento del arreglo de datos
-        registros.splice(index, 1);
-        // Volvemos a renderizar la interfaz con los cambios
-        renderizarRegistros();
-        mostrarMensaje('Registro eliminado correctamente.', 'warning');
+    // 4. ELIMINACIÓN MEDIANTE MODAL DE BOOTSTRAP
+    window.solicitarEliminacion = function(index) {
+        indiceAEliminar = index;
+        modalBootstrap.show();
     };
 
-    // 5. --- FUNCIONES DE VALIDACIÓN MODULARES (Conservadas de tu script original) ---
+    btnConfirmarEliminar.addEventListener('click', () => {
+        if (indiceAEliminar !== null) {
+            registros.splice(indiceAEliminar, 1);
+            renderizarRegistros();
+            mostrarMensaje('Registro eliminado correctamente.', 'warning');
+            indiceAEliminar = null;
+            modalBootstrap.hide();
+        }
+    });
+
+    // 5. FUNCIONES DE VALIDACIÓN MODULARES
     function validarNombre() {
         const valor = inputNombre.value.trim();
         if (valor.length >= 3) {
@@ -122,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. --- MANEJO DE EVENTOS EN TIEMPO REAL ---
+    // 6. EVENTOS EN TIEMPO REAL
     inputNombre.addEventListener('input', validarNombre);
     inputNombre.addEventListener('blur', validarNombre);
 
@@ -132,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inputDescripcion.addEventListener('input', validarDescripcion);
     inputDescripcion.addEventListener('blur', validarDescripcion);
 
-    // 7. --- CONTROL DEL FORMULARIO (Submit) ---
+    // 7. CONTROL DEL FORMULARIO CON SPINNER DE CARGA
     formulario.addEventListener('submit', (evento) => {
         evento.preventDefault(); 
 
@@ -141,32 +158,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const esDescripcionValida = validarDescripcion();
 
         if (esNombreValido && esCategoriaValida && esDescripcionValida) {
-            
-            // Creamos el nuevo objeto de datos
-            const nuevoRegistro = {
-                nombre: inputNombre.value.trim(),
-                categoria: inputCategoria.value,
-                descripcion: inputDescripcion.value.trim()
-            };
+            // Mostrar Spinner y deshabilitar botón
+            spinnerCarga.classList.remove('d-none');
+            btnSubmit.disabled = true;
 
-            // Insertamos el objeto en nuestro arreglo principal
-            registros.push(nuevoRegistro);
+            // Simulación de proceso asíncrono/carga
+            setTimeout(() => {
+                const nuevoRegistro = {
+                    nombre: inputNombre.value.trim(),
+                    categoria: inputCategoria.value,
+                    descripcion: inputDescripcion.value.trim()
+                };
 
-            // Renderizamos de nuevo para pintar los datos actualizados
-            renderizarRegistros();
+                registros.push(nuevoRegistro);
+                renderizarRegistros();
 
-            mostrarMensaje('¡Registro guardado con éxito!', 'success');
-            formulario.reset();
-            limpiarEstilosCampos();
+                mostrarMensaje('¡Registro guardado con éxito!', 'success');
+                formulario.reset();
+                limpiarEstilosCampos();
+
+                // Ocultar Spinner
+                spinnerCarga.classList.add('d-none');
+                btnSubmit.disabled = false;
+            }, 800);
+
         } else {
             mostrarMensaje('Por favor, corrija los campos marcados en rojo antes de registrar.', 'danger');
         }
     });
 
-    // 8. --- UTILIDADES ---
+    // 8. ALERTAS BOOTSTRAP DINÁMICAS
     function mostrarMensaje(texto, tipo) {
         mensajeAlerta.innerHTML = `
-            <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+            <div class="alert alert-${tipo} alert-dismissible fade show shadow-sm" role="alert">
                 ${texto}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -175,6 +199,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 9. CARGA INICIAL
-    // Pinta los registros iniciales inmediatamente al abrir la web
     renderizarRegistros();
 });
