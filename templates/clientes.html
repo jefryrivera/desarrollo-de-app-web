@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Clientes - Plataforma Web{% endblock %}
+
+{% block content %}
+<h2 class="text-primary mb-4">Módulo de Clientes</h2>
+
+<div class="table-responsive bg-white p-3 rounded shadow-sm">
+    <table class="table table-hover align-middle">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Nombre / Empresa</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.id }}</td>
+                <!-- Filtro |title convierte a Mayúscula Inicial -->
+                <td>{{ cliente.nombre|title }}</td>
+                <!-- Filtro |lower convierte todo a minúsculas -->
+                <td>{{ cliente.email|lower }}</td>
+                <td>{{ cliente.telefono }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

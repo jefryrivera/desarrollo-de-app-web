@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Proveedores - Plataforma Web{% endblock %}
+
+{% block content %}
+<h2 class="text-primary mb-4">Módulo de Proveedores</h2>
+
+<div class="row g-4">
+    {% for prov in proveedores %}
+    <div class="col-md-6">
+        <div class="card shadow-sm border-start border-4 border-primary">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ prov.empresa }}</h5>
+                <p class="card-text mb-1"><strong>Servicio:</strong> {{ prov.servicio }}</p>
+                <p class="card-text text-muted"><strong>Contacto:</strong> {{ prov.contacto }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

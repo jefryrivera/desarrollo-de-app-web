@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Facturación - Plataforma Web{% endblock %}
+
+{% block content %}
+<h2 class="text-primary mb-4">Módulo de Facturación</h2>
+
+<div class="table-responsive bg-white p-3 rounded shadow-sm">
+    <table class="table table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nº Factura</th>
+                <th>Cliente</th>
+                <th>Monto</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td><strong>{{ factura.id }}</strong></td>
+                <td>{{ factura.cliente }}</td>
+                <td>${{ factura.monto }}</td>
+                <td>
+                    {% if factura.estado == 'Pagado' %}
+                        <span class="badge bg-success">Pagado</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Productos - Plataforma Web{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary m-0">{{ titulo_modulo }}</h2>
+    <a href="{{ url_for('nuevo_producto') }}" class="btn btn-success">+ Nuevo Producto</a>
+</div>
+
+<div class="row g-4">
+    {% for prod in productos %}
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">{{ prod.categoria|upper }}</span>
+                <h5 class="card-title text-primary">{{ prod.nombre }}</h5>
+                <p class="card-text fw-bold text-success">${{ prod.precio }}</p>
+                
+                <p class="card-text mb-3">
+                    <strong>Estado:</strong>
+                    {% if prod.stock > 0 %}
+                        <span class="badge bg-success">Disponible ({{ prod.stock }} un.)</span>
+                    {% else %}
+                        <span class="badge bg-danger">Agotado</span>
+                    {% endif %}
+                </p>
+
+                <button class="btn btn-outline-primary btn-sm">Ver Detalle</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
